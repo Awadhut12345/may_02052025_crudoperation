@@ -1,6 +1,10 @@
 package com.soft.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,12 @@ public class EmployeeController {
 	@PostMapping("/save")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeService.createEmployeeService(employee);	
+	}
+	
+	@GetMapping("/allEmployee")
+	public List<Employee> getAllEmployee() {
+		List<Employee> emplist = employeeService.getAllEmployeeService();
+		return emplist;
 	}
 	
 	
