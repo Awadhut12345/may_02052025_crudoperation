@@ -1,4 +1,4 @@
-package com.soft.serviceImpl;
+package com.soft.service.Impl;
 
 import java.util.Optional;
 import java.util.List;
@@ -31,8 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee existingEmployee = employeeRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Employee not found"));
 		
-		
-		
 		existingEmployee.setName(employeeDetails.getName());
 		existingEmployee.setDepartment(employeeDetails.getDepartment());
 		existingEmployee.setEmail(employeeDetails.getEmail());
@@ -40,9 +38,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		existingEmployee.setPhone(employeeDetails.getPhone());
 		existingEmployee.setSalary(employeeDetails.getSalary());
 		
-		
-		
 		return employeeRepository.save(existingEmployee);
+	}
+
+	@Override
+	public Employee getEmployeeByIdService(int id) {
+		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!"));
 	}
 
 }

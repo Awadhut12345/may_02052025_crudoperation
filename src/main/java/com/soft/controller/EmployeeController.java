@@ -21,22 +21,33 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-
+	
+	
+	//Create employee
 	@PostMapping("/save")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeService.createEmployeeService(employee);
 	}
 
+	//Get all employees 
 	@GetMapping("/allEmployee")
 	public List<Employee> getAllEmployee() {
 		List<Employee> emplist = employeeService.getAllEmployeeService();
 		return emplist;
 	}
 
+	//Partially update employee by id using PUT()
 	@PutMapping("/update/{id}")
 	public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employeeDetails) {
 		return employeeService.updateEmployee(id, employeeDetails);
-
 	}
+	
+	//Get employee by id
+	@GetMapping("/employee/{id}")
+	public Employee getEmployeeById(@PathVariable int id) {
+		return employeeService.getEmployeeByIdService(id);
+		
+	}
+	
 
 }
