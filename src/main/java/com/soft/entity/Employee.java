@@ -1,6 +1,5 @@
 package com.soft.entity;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -78,9 +77,4 @@ public class Employee {
 		return "Employee [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
 				+ phone + ", department=" + department + ", salary=" + salary + "]";
 	}
-	
-	
-	
-	
-
 }

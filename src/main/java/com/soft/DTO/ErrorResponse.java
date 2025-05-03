@@ -3,7 +3,6 @@ package com.soft.DTO;
 import java.time.LocalDateTime;
 
 public class ErrorResponse {
-
 	private int status;
 	private String message;
 	private LocalDateTime timestmp;
@@ -30,10 +29,5 @@ public class ErrorResponse {
 	}
 	public void setTimestmp(LocalDateTime timestmp) {
 		this.timestmp = timestmp;
-	}
-	
-	
-	
-	
-	
+	}	
 }

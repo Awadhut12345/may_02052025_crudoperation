@@ -48,6 +48,4 @@ public class EmployeeController {
 		return employeeService.getEmployeeByIdService(id);
 		
 	}
-	
-
 }
