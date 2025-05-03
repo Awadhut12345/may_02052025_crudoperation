@@ -1,6 +1,7 @@
 package com.soft.serviceImpl;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import com.soft.service.EmployeeService;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
@@ -20,11 +21,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.save(employee);
 	}
 
+	public List<Employee> getAllEmployeeService() {
+		List<Employee> emplist = employeeRepository.findAll();
+		return emplist;
+	}
+
 	@Override
 	public Employee updateEmployee(int id, Employee employeeDetails) {
-		Employee employee = employeeRepository.findById(id).orElseThrow(() -> 
-				new RuntimeException("Employee not found"));
-		return employeeRepository.save(employee);
+		Employee existingEmployee = employeeRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Employee not found"));
+		
+		
+		
+		existingEmployee.setName(employeeDetails.getName());
+		existingEmployee.setDepartment(employeeDetails.getDepartment());
+		existingEmployee.setEmail(employeeDetails.getEmail());
+		existingEmployee.setAddress(employeeDetails.getAddress());
+		existingEmployee.setPhone(employeeDetails.getPhone());
+		existingEmployee.setSalary(employeeDetails.getSalary());
+		
+		
+		
+		return employeeRepository.save(existingEmployee);
 	}
 
 }
