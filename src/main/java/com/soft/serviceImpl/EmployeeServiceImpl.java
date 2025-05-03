@@ -1,5 +1,7 @@
 package com.soft.serviceImpl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee createEmployeeService(Employee employee) {
+		return employeeRepository.save(employee);
+	}
+
+	@Override
+	public Employee updateEmployee(int id, Employee employeeDetails) {
+		Employee employee = employeeRepository.findById(id).orElseThrow(() -> 
+				new RuntimeException("Employee not found"));
 		return employeeRepository.save(employee);
 	}
 
