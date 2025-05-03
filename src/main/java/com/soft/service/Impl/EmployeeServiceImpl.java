@@ -45,4 +45,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee getEmployeeByIdService(int id) {
 		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!" + id));
 	}
+
+	@Override
+	public List<Employee> getEmployeesSortedBySalaryDescService() {
+		return employeeRepository.findAllByOrderBySalaryDesc();
+	}
 }

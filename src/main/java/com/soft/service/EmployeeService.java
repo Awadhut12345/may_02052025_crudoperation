@@ -17,5 +17,7 @@ public interface EmployeeService {
 	
 	//Get employee by id
 	public Employee getEmployeeByIdService(int id);
+	
+	public List<Employee> getEmployeesSortedBySalaryDescService();
 
 }
