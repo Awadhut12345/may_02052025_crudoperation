@@ -1,12 +1,12 @@
 package com.soft.service.Impl;
 
-import java.util.Optional;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.soft.entity.Employee;
+import com.soft.exception.ResourceNotFoundException;
 import com.soft.repository.EmployeeRepository;
 import com.soft.service.EmployeeService;
 
@@ -23,24 +23,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	public List<Employee> getAllEmployeeService() {
 		List<Employee> emplist = employeeRepository.findAll();
-		return emplist;
+		if (emplist.isEmpty()) {
+	        throw new ResourceNotFoundException("No employees found in the database");
+	    }
+	    return emplist;
 	}
 
 	@Override
 	public Employee updateEmployee(int id, Employee employeeDetails) {
-		Employee existingEmployee = employeeRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Employee not found"));
-		
-		existingEmployee.setName(employeeDetails.getName());
-		existingEmployee.setDepartment(employeeDetails.getDepartment());
-		existingEmployee.setEmail(employeeDetails.getEmail());
-		existingEmployee.setAddress(employeeDetails.getAddress());
-		existingEmployee.setPhone(employeeDetails.getPhone());
-		existingEmployee.setSalary(employeeDetails.getSalary());
-		
-		return employeeRepository.save(existingEmployee);
-	}
+	    Employee existingEmployee = employeeRepository.findById(id)
+	            .orElseThrow(() -> new ResourceNotFoundException("Employee with ID " + id + " not found"));
+	    existingEmployee.setName(employeeDetails.getName());
+	    existingEmployee.setDepartment(employeeDetails.getDepartment());
+	    existingEmployee.setEmail(employeeDetails.getEmail());
+	    existingEmployee.setAddress(employeeDetails.getAddress());
+	    existingEmployee.setPhone(employeeDetails.getPhone());
+	    existingEmployee.setSalary(employeeDetails.getSalary());
 
+	    return employeeRepository.save(existingEmployee);
+	}
+	
 	@Override
 	public Employee getEmployeeByIdService(int id) {
 		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!" + id));
