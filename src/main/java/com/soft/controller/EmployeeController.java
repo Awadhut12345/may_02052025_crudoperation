@@ -1,5 +1,6 @@
 package com.soft.controller;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soft.entity.Employee;
+import com.soft.exception.ResourceNotFoundException;
 import com.soft.service.EmployeeService;
 
 @RestController
@@ -39,8 +41,12 @@ public class EmployeeController {
 
 	//Partially update employee by id using PUT()
 	@PutMapping("/update/{id}")
-	public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employeeDetails) {
-		return employeeService.updateEmployee(id, employeeDetails);
+	public Map<String, Object> updateEmployee(@RequestBody Employee emp,@PathVariable int id){
+		Map<String, Object> response =employeeService.updateEmployee(id,emp);
+		if(response.containsKey("UpdateUser")) {
+			return response;
+		}
+		throw new ResourceNotFoundException("Employee not found");
 	}
 	
 	//Get employee by id
@@ -55,4 +61,17 @@ public class EmployeeController {
 		List<Employee> employees = employeeService.getEmployeesSortedBySalaryDescService();
 		return ResponseEntity.ok(employees);		
 	}	
+	
+	//get employee whose name start with "R"
+	 @GetMapping("/startWithR")
+	public List<Employee> getEmployeeStartingWithR(){
+		List<Employee> grtEmpR=employeeService.getEmployeeStartingWithRService();
+		return grtEmpR;
+		}
+	 
+	 @GetMapping("/deleteEmp/{id}")
+	 public Map<String, Object> deleteEmployee(@PathVariable int id){
+		  Map<String, Object> response= employeeService.deletEmployee(id);
+		  return response;
+	 }
 }

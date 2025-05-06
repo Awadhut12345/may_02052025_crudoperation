@@ -12,21 +12,11 @@ public class GlobleExceptionHandler {
 		
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
-		ErrorResponse error = new ErrorResponse(
-				HttpStatus.NOT_FOUND.value(),
-				ex.getMessage(),
-				LocalDateTime.now()			
-				);
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);	
+		ErrorResponse error = new ErrorResponse(404,"Employee Not Present in Database",LocalDateTime.now());
+		ResponseEntity<ErrorResponse> response= new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+		return response;
 	}
 	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
-		ErrorResponse error = new ErrorResponse(
-				HttpStatus.INTERNAL_SERVER_ERROR.value(),
-				"Intrnal Server Error",
-				LocalDateTime.now()	
-		);		
-		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+	
+	
 }
