@@ -61,4 +61,11 @@ public class EmployeeController {
 		List<Employee> employees = employeeService.getEmployeesSortedBySalaryDescService();
 		return ResponseEntity.ok(employees);		
 	}	
+	
+	//get employee whose name start with "R"
+	 @GetMapping("/startWithR")
+	public List<Employee> getEmployeeStartingWithR(){
+		List<Employee> grtEmpR=employeeService.getEmployeeStartingWithRService();
+		return grtEmpR;
+		}
 }

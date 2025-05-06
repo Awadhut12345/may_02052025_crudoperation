@@ -68,4 +68,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> getEmployeesSortedBySalaryDescService() {
 		return employeeRepository.findAllByOrderBySalaryDesc();
 	}
+
+	@Override
+	public List<Employee> getEmployeeStartingWithRService() {
+		List<Employee> saveRemp=employeeRepository.findEmployeeStartingWithR();
+		return saveRemp;
+	}
 }

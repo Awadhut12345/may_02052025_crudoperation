@@ -11,4 +11,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 
 	@Query
 	public List<Employee> findAllByOrderBySalaryDesc();
+	
+	@Query("SELECT e FROM Employee e WHERE LOWER(e.name) LIKE 'r%'")
+    List<Employee> findEmployeeStartingWithR();
 }
