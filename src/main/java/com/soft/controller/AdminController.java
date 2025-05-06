@@ -22,6 +22,7 @@ public class AdminController {
 		return "admin-register";	
 	}
 	
+	  
 	@PostMapping("/save")
 	public Admin createAdmin(@RequestBody Admin admin) {
 		return adminSevice.createAdminService(admin);
