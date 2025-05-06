@@ -74,4 +74,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<Employee> saveRemp=employeeRepository.findEmployeeStartingWithR();
 		return saveRemp;
 	}
+
+	@Override
+	public Map<String, Object> deletEmployee(int id) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		Optional<Employee> empid = employeeRepository.findById(id);
+		if(empid.isPresent()) {
+			Employee emp=empid.get();
+			employeeRepository.deleteById(id);
+			response.put("StatusCode", "200");
+			response.put("Message","Delete Successfully");
+			response.put("DeleteEmployee", emp);
+		}else {
+			response.put("StatusCode", "404");
+			response.put("Message", "Id Not Found");
+		}
+		return response;
+	}
 }

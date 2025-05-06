@@ -22,5 +22,8 @@ public interface EmployeeService {
 	public List<Employee> getEmployeesSortedBySalaryDescService();
 	
 	 public List<Employee> getEmployeeStartingWithRService();
+	 
+	 //delete employee by id
+	 public Map<String, Object> deletEmployee(int id);
 
 }

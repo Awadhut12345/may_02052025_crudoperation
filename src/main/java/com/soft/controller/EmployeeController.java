@@ -68,4 +68,10 @@ public class EmployeeController {
 		List<Employee> grtEmpR=employeeService.getEmployeeStartingWithRService();
 		return grtEmpR;
 		}
+	 
+	 @GetMapping("/deleteEmp/{id}")
+	 public Map<String, Object> deleteEmployee(@PathVariable int id){
+		  Map<String, Object> response= employeeService.deletEmployee(id);
+		  return response;
+	 }
 }
