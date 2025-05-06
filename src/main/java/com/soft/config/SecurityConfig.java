@@ -25,6 +25,8 @@ public class SecurityConfig {
 				.requestMatchers("/public/**").permitAll()
 				.anyRequest().authenticated()
 			)
+			.httpBasic()
+			.and()
 			.formLogin()
 			.and()
 			.logout();
