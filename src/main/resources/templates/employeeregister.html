@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+					body {
+					  font-family: sans-serif;
+					  background-color: #f9f9f9;
+					}
+					
+					.OuterContainer {
+					  background-color: #fff;
+					  padding: 40px;
+					  width: 60%;
+					  margin: 40px auto;
+					  border-radius: 10px;
+					  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+					}
+					
+					.headingContainer {
+					  text-align: center;
+					  margin-bottom: 30px;
+					}
+					
+					.headingContainer h1 {
+					  margin: 0;
+					  font-size: 2rem;
+					  color: #333;
+					}
+					
+					.formContainer form {
+					  display: flex;
+					  flex-direction: column;
+					  gap: 20px;
+					}
+					
+					.form-group {
+					  display: flex;
+					  align-items: center;
+					}
+					
+					.form-group label {
+					  width: 200px;
+					  font-size: 1rem;
+					  font-weight: bold;
+					}
+					
+					.form-group input,
+					.form-group select {
+					  flex: 1;
+					  padding: 10px;
+					  font-size: 1rem;
+					  border-radius: 5px;
+					  border: 1px solid #ccc;
+					}
+					
+					button {
+					  align-self: center;
+					  background-color: #4CAF50;
+					  color: white;
+					  width: 150px;
+					  padding: 12px;
+					  font-size: 1rem;
+					  border: none;
+					  border-radius: 8px;
+					  cursor: pointer;
+					  transition: background 0.3s;
+					}
+					
+					button:hover {
+					  background-color: #45a049;
+					}
+</style>
+</head>
+<body>
+<div class="OuterContainer">
+<div class="headingContainer"><h1>Registration Page</h1></div>
+<div class="formContainer">
+
+<form action="/save" method="post">
+  <div class="form-group">
+    <label>Employee Name</label>
+    <input type="text" name="name" placeholder="Enter Employee name">
+  </div>
+
+  <div class="form-group">
+    <label>Employee Email</label>
+    <input type="email" name="email" placeholder="Enter Email">
+  </div>
+
+  <div class="form-group">
+    <label>Employee Address</label>
+    <input type="text" name="address" placeholder="Enter Address">
+  </div>
+
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input type="tel" name="phone" placeholder="Enter Phone Number">
+  </div>
+
+  <div class="form-group">
+    <label>Department</label>
+    <select name="department" onchange="updateDepartment()">
+      <option>IT DEPARTMENT</option>
+      <option>ELECTRICAL DEPARTMENT</option>
+      <option>SELLS DEPARTMENT</option>
+      <option>VOICE PROCESSING DEPARTMENT</option>
+      <option>CIVIL DEPARTMENT</option>
+      <option>OTHER</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Other Department</label>
+    <input type="text" id="deptInput" name="department" placeholder="Enter Your Department">
+  </div>
+
+  <div class="form-group">
+    <label>Salary</label>
+    <input type="number" name="salary" placeholder="Enter Salary">
+  </div>
+
+  <button type="submit">SUBMIT</button>
+
+</form>
+</div>
+</div>
+<script>
+  function updateDepartment() {
+    const select = document.querySelector('select[name="department"]');
+    const input = document.getElementById('deptInput');
+    input.value = select.value;
+    if (select.value === "OTHER") {
+        input.value = ""; // Clear for manual input
+        input.readOnly = false;
+        input.focus();
+      } else {
+        input.value = select.value;
+        input.readOnly = true;
+      }
+  }
+  
+</script>
+
+
+</body>
+</html>
