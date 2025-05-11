@@ -10,4 +10,9 @@ public class ShowPages {
 	public String employeeregistrationpage() {
 		return "employeeregister";
 	}
+	
+	@GetMapping("/emplogin")
+	public String employeeloginpage() {
+		return "employeelogin";
+	}
 }
