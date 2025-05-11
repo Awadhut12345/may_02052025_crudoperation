@@ -100,20 +100,10 @@
   </div>
 
   <div class="form-group">
-    <label>Department</label>
-    <select name="department" onchange="updateDepartment()">
-      <option>IT DEPARTMENT</option>
-      <option>ELECTRICAL DEPARTMENT</option>
-      <option>SELLS DEPARTMENT</option>
-      <option>VOICE PROCESSING DEPARTMENT</option>
-      <option>CIVIL DEPARTMENT</option>
-      <option>OTHER</option>
+    <label>Role</label>
+    <select name="role" onchange="updateDepartment()">
+      <option>Employee</option>
     </select>
-  </div>
-
-  <div class="form-group">
-    <label>Other Department</label>
-    <input type="text" id="deptInput" name="department" placeholder="Enter Your Department">
   </div>
 
   <div class="form-group">
@@ -126,23 +116,5 @@
 </form>
 </div>
 </div>
-<script>
-  function updateDepartment() {
-    const select = document.querySelector('select[name="department"]');
-    const input = document.getElementById('deptInput');
-    input.value = select.value;
-    if (select.value === "OTHER") {
-        input.value = ""; // Clear for manual input
-        input.readOnly = false;
-        input.focus();
-      } else {
-        input.value = select.value;
-        input.readOnly = true;
-      }
-  }
-  
-</script>
-
-
 </body>
 </html>

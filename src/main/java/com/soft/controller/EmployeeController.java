@@ -43,7 +43,7 @@ public class EmployeeController {
 	@PutMapping("/update/{id}")
 	public Map<String, Object> updateEmployee(@RequestBody Employee emp,@PathVariable int id){
 		Map<String, Object> response =employeeService.updateEmployee(id,emp);
-		if(response.containsKey("UpdateUser")) {
+		if(response.containsKey("updateEmployee")) {
 			return response;
 		}
 		throw new ResourceNotFoundException("Employee not found");

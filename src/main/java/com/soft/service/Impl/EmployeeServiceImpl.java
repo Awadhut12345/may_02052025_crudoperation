@@ -6,21 +6,38 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.soft.entity.Employee;
-import com.soft.exception.ResourceNotFoundException;
+//import com.soft.exception.ResourceNotFoundException;
 import com.soft.repository.EmployeeRepository;
 import com.soft.service.EmployeeService;
+import com.soft.util.EmployeeUtil;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private EmployeeUtil emputil;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private OtherService otherService;
 
 	@Override
 	public Employee createEmployeeService(Employee employee) {
+		String generatePassword = emputil.genPwd();
+		String generateOtp = emputil.genOtp();
+		
+		employee.setPassword(passwordEncoder.encode(generatePassword));
+		employee.setOtp(generateOtp);
+		otherService.sendEmployeeCredentials(employee,generatePassword,generateOtp);
 		return employeeRepository.save(employee);
 	}
 
@@ -28,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> getAllEmployeeService() {
 		List<Employee> emplist = employeeRepository.findAll();
 		if (emplist.isEmpty()) {
-	        throw new ResourceNotFoundException("No employees found in the database");
+	        //throw new ResourceNotFoundException("No employees found in the database");
 	    }
 	    return emplist;
 	}
@@ -40,7 +57,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if(empid.isPresent()) {
 			Employee existingEmployee = empid.get();
 			existingEmployee.setName(employeeDetails.getName());
-			existingEmployee.setDepartment(employeeDetails.getDepartment());
 			existingEmployee.setEmail(employeeDetails.getEmail());
 			existingEmployee.setAddress(employeeDetails.getAddress());
 			existingEmployee.setPhone(employeeDetails.getPhone());
@@ -49,7 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Employee updateemp =employeeRepository.save(existingEmployee);
 			response.put("statusCode", "200");
 			response.put("message", "Update successfully");
-			response.put("UpdateUser", updateemp);
+			response.put("updateEmployee", updateemp);
 		}else {
 			response.put("statuscode", 404);
 			response.put("message","Employee not found");
@@ -60,7 +76,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 
 	@Override
 	public Employee getEmployeeByIdService(int id) {
-		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!" + id));
+//		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!" + id));
+		return null;
 	}
 
 	
@@ -91,4 +108,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return response;
 	}
+
+	
 }
