@@ -28,7 +28,7 @@ public class SecurityConfig {
 			.httpBasic()
 			.and()
 			.formLogin()
-				//.loginPage("/login")
+				.loginPage("/log")
 				.defaultSuccessUrl("/admin/dashbord",true)
 			.and()
 			.logout();

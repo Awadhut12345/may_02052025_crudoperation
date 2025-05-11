@@ -76,8 +76,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 
 	@Override
 	public Employee getEmployeeByIdService(int id) {
-//		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!" + id));
-		return null;
+		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found...!" + id));
+		
 	}
 
 	
